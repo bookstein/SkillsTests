@@ -45,9 +45,9 @@ def largest(number_list):
 
 # Write a function that takes a list of numbers and returns a new list of all those numbers divided by two.
 def halvesies(number_list):
-    halved_list = number_list[:] #this is a wasted move. how could i do it better?
-    for idx in range(len(number_list)):
-        halved_list[idx] = float(number_list[idx])/2
+    halved_list = [] #don't clone the whole number_list; initiate new, append
+    for num in number_list:
+        halved_list.append(float(num)/2)
     return halved_list
 
 # Write a function that takes a list of words and returns a list of all the lengths of those words.
