@@ -5,8 +5,6 @@ word_list = [ "What", "about", "the", "Spam", "sausage", "spam", "spam", "bacon"
 
 word_functions = {
 	"long_words": sk1.long_words,
-	"larg": sk1.largest,
-	"sm": sk1.smallest,
 	"word_len": sk1.word_lengths,
 	"join_str": sk1.join_strings,
 }
@@ -14,6 +12,8 @@ word_functions = {
 num_functions = {
 	"odd": sk1.all_odd,
 	"even": sk1.all_even,
+	"sm": sk1.smallest,
+	"larg": sk1.largest,
 	"halve": sk1.halvesies,
 	"sum_num": sk1.sum_numbers,
 	"mult_num": sk1.mult_numbers,
@@ -23,10 +23,10 @@ num_functions = {
 #print out answers
 for key in num_functions:
 	test_num = num_functions[key](number_list)
-	print test_num
+	print key, test_num
 
 for key in word_functions:
 	test_word = word_functions[key](word_list)
-	print test_word
+	print key, test_word
 
 #verify answers match expected answers

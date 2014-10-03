@@ -29,19 +29,30 @@ def long_words(word_list):
 
 # Write a function that finds the smallest element in a list of integers and returns it.
 def smallest(number_list):
-    return None
+    start = number_list[0]
+    for num in number_list:
+        if num <= start:
+            start = num
+    return start
 
 # Write a function that finds the largest element in a list of integers and returns it.
 def largest(number_list):
-    return None
+    start = number_list[0]
+    for num in number_list:
+        if num >= start:
+            start = num
+    return start
 
 # Write a function that takes a list of numbers and returns a new list of all those numbers divided by two.
 def halvesies(number_list):
-    return []
+    halved_list = number_list[:] #this is a wasted move. how could i do it better?
+    for idx in range(len(number_list)):
+        halved_list[idx] = float(number_list[idx])/2
+    return halved_list
 
 # Write a function that takes a list of words and returns a list of all the lengths of those words.
 def word_lengths(word_list):
-    return []
+
 
 # Write a function (using iteration) that sums all the numbers in a list.
 def sum_numbers(number_list):
