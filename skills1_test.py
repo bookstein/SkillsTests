@@ -20,6 +20,7 @@ num_functions = {
 	"avg": sk1.average,
 }
 
+#print out answers
 for key in num_functions:
 	test_num = num_functions[key](number_list)
 	print test_num
@@ -28,3 +29,4 @@ for key in word_functions:
 	test_word = word_functions[key](word_list)
 	print test_word
 
+#verify answers match expected answers
