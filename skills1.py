@@ -59,7 +59,10 @@ def word_lengths(word_list):
 
 # Write a function (using iteration) that sums all the numbers in a list.
 def sum_numbers(number_list):
-    return 0
+    total = 0
+    for num in number_list:
+        total += num
+    return total
 
 # Write a function that multiplies all the numbers in a list together.
 def mult_numbers(number_list):
