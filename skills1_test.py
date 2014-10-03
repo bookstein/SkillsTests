@@ -34,6 +34,7 @@ import unittest
 
 #why is this setup required with class?
 class Test_Skills1(unittest.TestCase):
+
 	def setUp(self):
 		self.number_list = [-5, 6, 4, 8, 15, 16, 23, 42, 2, 7]
 		self.word_list = ["What", "about", "the", "Spam", "sausage", "spam", "spam", "bacon", "spam", "tomato", "and", "spam"]
