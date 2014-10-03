@@ -3,6 +3,8 @@ import skills1 as sk1
 number_list = [-5, 6, 4, 8, 15, 16, 23, 42, 2, 7]
 word_list = [ "What", "about", "the", "Spam", "sausage", "spam", "spam", "bacon", "spam", "tomato", "and", "spam"]
 
+print "Original number list: ", number_list
+print "Original word list: ", word_list
 word_functions = {
 	"long_words": sk1.long_words,
 	"word_len": sk1.word_lengths,
