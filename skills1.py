@@ -6,22 +6,20 @@ word_list = [ "What", "about", "the", "Spam", "sausage", "spam", "spam", "bacon"
 # Write a function that takes a list of numbers and returns a new list with only the odd numbers.
 def all_odd(number_list):
     def is_odd(num):
-        return number % 2 != 0
+        return num % 2 != 0
     return filter(is_odd, number_list)
 
 # Write a function that takes a list of numbers and returns a new list with only the even numbers.
 def all_even(number_list):
     def is_even(num):
-            return number % 2 == 0
-        return filter(is_even, number_list)
+        return num % 2 == 0
+    return filter(is_even, number_list)
 
 # Write a function that takes a list of strings and a new list with all strings of length 4 or greater.
 def long_words(word_list):
-    longwords = []
-    for word in word_list:
-        if len(word) >= 4:
-            longwords.append(word)
-    return longwords
+    def check_length(word):
+        return len(word) >= 4
+    return filter(check_length, word_list)
 
 # Write a function that finds the smallest element in a list of integers and returns it.
 def smallest(number_list):
