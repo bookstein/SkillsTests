@@ -5,19 +5,15 @@ word_list = [ "What", "about", "the", "Spam", "sausage", "spam", "spam", "bacon"
 
 # Write a function that takes a list of numbers and returns a new list with only the odd numbers.
 def all_odd(number_list):
-    odds = []
-    for num in number_list:
-        if num % 2 != 0:
-            odds.append(num)
-    return odds
+    def is_odd(num):
+        return number % 2 != 0
+    return filter(is_odd, number_list)
 
 # Write a function that takes a list of numbers and returns a new list with only the even numbers.
 def all_even(number_list):
-    evens = []
-    for num in number_list:
-        if num%2 == 0:
-            evens.append(num)
-    return evens
+    def is_even(num):
+            return number % 2 == 0
+        return filter(is_even, number_list)
 
 # Write a function that takes a list of strings and a new list with all strings of length 4 or greater.
 def long_words(word_list):
@@ -37,11 +33,14 @@ def smallest(number_list):
 
 # Write a function that finds the largest element in a list of integers and returns it.
 def largest(number_list):
-    start = number_list[0]
-    for num in number_list:
-        if num >= start:
-            start = num
-    return start
+    # start = number_list[0]
+    # for num in number_list:
+    #     if num >= start:
+    #         start = num
+    # return start
+    def is_larger(num1, num2):
+        return num1 < num2
+    return filter(is_larger, number_list)
 
 # Write a function that takes a list of numbers and returns a new list of all those numbers divided by two.
 def halvesies(number_list):
