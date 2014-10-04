@@ -44,15 +44,13 @@ def halvesies(number_list):
     def divide_by_2(number):
         return float(number)/2
 
-    halved_list = map(divide_by_2, number_list)
-    return halved_list
+    return map(divide_by_2, number_list)
 
 # Write a function that takes a list of words and returns a list of all the lengths of those words.
 def word_lengths(word_list):
     def measure_length(word):
         length = len(word)
         return length
-
     return map(measure_length, word_list)
 
 # Write a function (using iteration) that sums all the numbers in a list.
