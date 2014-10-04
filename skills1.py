@@ -45,10 +45,6 @@ def largest(number_list):
 
 # Write a function that takes a list of numbers and returns a new list of all those numbers divided by two.
 def halvesies(number_list):
-    # halved_list = [] #don't clone the whole number_list; initiate new, append
-    # for num in number_list:
-    #     halved_list.append(float(num)/2)
-    # return halved_list
     def divide_by_2(number):
         return float(number)/2
 
@@ -57,10 +53,16 @@ def halvesies(number_list):
 
 # Write a function that takes a list of words and returns a list of all the lengths of those words.
 def word_lengths(word_list):
-    #lengths_list = word_list[:]
-    lengths_list = []
-    for word in word_list: #when to use word in wordlist, and when to use index in len(wordlist)??
-        lengths_list.append(len(word))
+    # #lengths_list = word_list[:]
+    # lengths_list = []
+    # for word in word_list: #when to use word in wordlist, and when to use index in len(wordlist)??
+    #     lengths_list.append(len(word))
+    # return lengths_list
+    def measure_length(word):
+        length = len(word)
+        return length
+
+    lengths_list = map(measure_length, word_list)
     return lengths_list
 
 # Write a function (using iteration) that sums all the numbers in a list.
