@@ -32,7 +32,7 @@ import unittest
 # 	print key, test_word
 
 
-#why is this setup required with class?
+#why is this setup required with class? --> because it's imported from unittest library
 class Test_Skills1(unittest.TestCase):
 
 	def setUp(self):
