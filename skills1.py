@@ -23,11 +23,12 @@ def long_words(word_list):
 
 # Write a function that finds the smallest element in a list of integers and returns it.
 def smallest(number_list):
-    start = number_list[0]
-    for num in number_list:
-        if num <= start:
-            start = num
-    return start
+    def is_smaller(num1, num2):
+        if num1 < num2:
+            return num1
+        else:
+            return num2
+    return reduce(is_smaller, number_list)
 
 # Write a function that finds the largest element in a list of integers and returns it.
 def largest(number_list):
