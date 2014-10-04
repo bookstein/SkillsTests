@@ -31,14 +31,12 @@ def smallest(number_list):
 
 # Write a function that finds the largest element in a list of integers and returns it.
 def largest(number_list):
-    # start = number_list[0]
-    # for num in number_list:
-    #     if num >= start:
-    #         start = num
-    # return start
     def is_larger(num1, num2):
-        return num1 < num2
-    return filter(is_larger, number_list)
+        if num1 > num2:
+            return num1
+        else:
+            return num2
+    return reduce(is_larger, number_list)
 
 # Write a function that takes a list of numbers and returns a new list of all those numbers divided by two.
 def halvesies(number_list):
