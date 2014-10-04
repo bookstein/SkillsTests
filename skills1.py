@@ -53,24 +53,17 @@ def halvesies(number_list):
 
 # Write a function that takes a list of words and returns a list of all the lengths of those words.
 def word_lengths(word_list):
-    # #lengths_list = word_list[:]
-    # lengths_list = []
-    # for word in word_list: #when to use word in wordlist, and when to use index in len(wordlist)??
-    #     lengths_list.append(len(word))
-    # return lengths_list
     def measure_length(word):
         length = len(word)
         return length
 
-    lengths_list = map(measure_length, word_list)
-    return lengths_list
+    return map(measure_length, word_list)
 
 # Write a function (using iteration) that sums all the numbers in a list.
 def sum_numbers(number_list):
-    total = 0
-    for num in number_list:
-        total += num
-    return total
+    def sums(num1, num2):
+        return num1 + num2
+    return reduce(sums, number_list)
 
 # Write a function that multiplies all the numbers in a list together.
 def mult_numbers(number_list):
