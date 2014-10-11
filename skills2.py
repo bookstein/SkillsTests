@@ -93,7 +93,7 @@ def find_duplicates(words):
 	print d
 	print results
 
-find_duplicates(words)
+# find_duplicates(words)
 
 
 """
@@ -102,7 +102,24 @@ Bonus: do it on a file instead of the list provided
 Bonus: print the words in alphabetical order in ascending order of length
 """
 def word_length(words):
-	pass
+	d1 = {}
+	d2 = {}
+	for word in words:
+		# length = len(word)
+		# d[length] = d.setdefault(length, word)
+		d1[word] = len(word)
+
+	for key in d1.keys():
+		# print key
+		temp = d1[key]
+		# print temp
+		d2[temp] = key
+
+
+	print d2
+
+word_length(words)
+
 
 """
 Here's a table of English to Pirate translations
