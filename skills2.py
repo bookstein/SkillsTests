@@ -102,21 +102,19 @@ Bonus: do it on a file instead of the list provided
 Bonus: print the words in alphabetical order in ascending order of length
 """
 def word_length(words):
-	d1 = {}
-	d2 = {}
+	d = {}
+
 	for word in words:
 		# length = len(word)
 		# d[length] = d.setdefault(length, word)
-		d1[word] = len(word)
+		word = word.lower()
+		d[word] = len(word)
 
-	for key in d1.keys():
-		# print key
-		temp = d1[key]
-		# print temp
-		d2[temp] = key
+	tuples = d.items()
+	print tuples
 
 
-	print d2
+
 
 word_length(words)
 
