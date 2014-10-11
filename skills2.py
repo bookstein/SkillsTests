@@ -19,7 +19,7 @@ def count_unique(string1):
     		d.setdefault(word, 1)
     return d
 
-count_unique(string1)
+# count_unique(string1)
 
 """
 Given two lists, (without using the keywords 'if __ in ____' or the method 'index')
@@ -37,7 +37,7 @@ def common_items(list1, list2):
 
     print results
 
-common_items(list1, list2)
+# common_items(list1, list2)
 
 
 
@@ -55,15 +55,23 @@ def common_items2(list1, list2):
     	if d.get(item):
     		results.append(item)
 
-   	print results
+	print results
 
-common_items2(list1, list2)
+# common_items2(list1, list2)
 
 """
 Given a list of numbers, return list of number pairs that sum to zero
 """
 def sum_zero(list1):
-    pass
+    results = []
+    #make tuples that sum to zero
+    for idx in range(len(list1)):
+    	for idx_2 in range(len(list1)):
+    		if list1[idx] + list1[idx_2] == 0:
+    			results.append((list1[idx], list1[idx_2]))
+    print results
+
+sum_zero(list1)
 
 """
 Given a list of words, return a list of words with duplicates removed
