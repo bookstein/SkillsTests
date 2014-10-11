@@ -10,14 +10,14 @@ the value
 Bonus: do the same for a file (i.e. twain.txt)
 """
 def count_unique(string1):
-    d = {}
-    word_list = string1.lower().split()
-    for word in word_list:
-    	if d.get(word):
-    		d[word]+=1
-    	else:
-    		d.setdefault(word, 1)
-    return d
+	d = {}
+	word_list = string1.lower().split()
+	for word in word_list:
+		if d.get(word):
+			d[word]+=1
+		else:
+			d.setdefault(word, 1)
+	return d
 
 # count_unique(string1)
 
@@ -26,16 +26,16 @@ Given two lists, (without using the keywords 'if __ in ____' or the method 'inde
 return a list of all common items shared between both lists
 """
 def common_items(list1, list2):
-    d = {}
-    results = []
-    # key in dict --> returns True if key is present, but I'm not allowed this
-    for item in list1:
-    	d[item] = 1
-    for item in list2:
-    	if d.get(item):
-    		results.append(item)
+	d = {}
+	results = []
+	# key in dict --> returns True if key is present, but I'm not allowed this
+	for item in list1:
+		d[item] = 1
+	for item in list2:
+		if d.get(item):
+			results.append(item)
 
-    print results
+	print results
 
 # common_items(list1, list2)
 
@@ -47,13 +47,13 @@ return a list of all common items shared between both lists. This time,
 use a dictionary as part of your solution.
 """
 def common_items2(list1, list2):
-    d = {}
-    results = []
-    for item in list1:
-    	d[item] = 1
-    for item in list2:
-    	if d.get(item):
-    		results.append(item)
+	d = {}
+	results = []
+	for item in list1:
+		d[item] = 1
+	for item in list2:
+		if d.get(item):
+			results.append(item)
 
 	print results
 
@@ -63,13 +63,18 @@ def common_items2(list1, list2):
 Given a list of numbers, return list of number pairs that sum to zero
 """
 def sum_zero(list1):
-    results = []
-    #make tuples that sum to zero
-    for idx in range(len(list1)):
-    	for idx_2 in range(len(list1)):
-    		if list1[idx] + list1[idx_2] == 0:
-    			results.append((list1[idx], list1[idx_2]))
-    print results
+	d = {}
+	results = []
+	#make tuples of nums that sum to zero
+	for idx in range(len(list1)):
+		for idx_2 in range(len(list1)):
+			if list1[idx] + list1[idx_2] == 0:
+				d[list1[idx]] = d.get(list1[idx], list1[idx_2])
+
+	for key in d.keys():
+		results.append((key, d[key]))
+
+	print results
 
 sum_zero(list1)
 
@@ -77,7 +82,7 @@ sum_zero(list1)
 Given a list of words, return a list of words with duplicates removed
 """
 def find_duplicates(words):
-    pass
+	pass
 
 """
 Given a list of words, print the words in ascending order of length
@@ -85,7 +90,7 @@ Bonus: do it on a file instead of the list provided
 Bonus: print the words in alphabetical order in ascending order of length
 """
 def word_length(words):
-    pass
+	pass
 
 """
 Here's a table of English to Pirate translations
