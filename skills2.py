@@ -47,7 +47,17 @@ return a list of all common items shared between both lists. This time,
 use a dictionary as part of your solution.
 """
 def common_items2(list1, list2):
-    pass
+    d = {}
+    results = []
+    for item in list1:
+    	d[item] = 1
+    for item in list2:
+    	if d.get(item):
+    		results.append(item)
+
+   	print results
+
+common_items2(list1, list2)
 
 """
 Given a list of numbers, return list of number pairs that sum to zero
