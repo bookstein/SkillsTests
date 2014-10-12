@@ -91,13 +91,15 @@ def word_length(words):
 	for key, value in sorted(d.items(), key = lambda x: x[1], reverse = False):
 		print key, value
 
-word_length(words)
+# word_length(words)
 
+import string
 
 """
-Here's a table of English to Pirate translations
-English     Pirate
-
+Write a program that asks the user to type in a sentence and then
+print the sentece translated to pirate.
+"""
+pirate_translations ="""
 sir         matey
 hotel       fleabag inn
 student     swabbie
@@ -116,68 +118,49 @@ my          me
 hello       avast
 is          be
 man         matey
-
-Write a program that asks the user to type in a sentence and then
-print the sentece translated to pirate.
 """
-pirate_translations = """
-	sir         matey
-	hotel       fleabag inn
-	student     swabbie
-	boy         matey
-	madam       proud beauty
-	professor   foul blaggart
-	restaurant  galley
-	your        yer
-	excuse      arr
-	students    swabbies
-	are         be
-	lawyer      foul blaggart
-	the         th'
-	restroom    head
-	my          me
-	hello       avast
-	is          be
-	man         matey
-	"""
 
 def make_dictionary(translations):
-	dictionary = {}
+	translation_dictionary = {}
 
 	translations = translations.strip()
-	# split up text into individual word pairs
-	word_pairs = translations.split('\n')
-	# print word_pairs
-	# for each word pair, strip whitespace and split on tabs
-	for i in range(len(word_pairs)):
-		# assigns to each position in word_pairs a list of correlated words
-		word_pairs[i] = word_pairs[i].split()
-		dictionary[word_pairs[i][0]] = word_pairs[i][1:]
-	# print dictionary
+	# print translations
+	translations = translations.split('\n')
+	# print translations
 
-	return dictionary
 
-	# for i in range(len(word_pairs)):
-	# 	word_pairs[i].split(' \t\n\r')
-	# 	# pair = word_pairs[i].strip()
-	# 	# pair = pair.split(' \t\n\r')
-	# 	print word_pairs[i]
+	for word_pair in translations:
+		word_pair = word_pair.strip()
+		word_pair = word_pair.split()
+		# print word_pair
+		translation_dictionary[word_pair[0]] = word_pair[1:]
 
-# pirate_dictionary = make_dictionary(pirate_translations)
+	return translation_dictionary
 
-def translate_to_pirate(sentence, dictionary):
-	translated_sentence = ""
-	sentence = sentence.split()
-	for word in sentence:
+def translate(sentence, dictionary):
+	sentence = sentence.strip()
+	words = sentence.split()
+
+	translation = []
+	for word in words:
+		# to remove punctuation from word for dictionary lookup:
+		# however, this is inefficient and runs through each word multiple times
+		for punc in string.punctuation:
+			word = word.replace(punc, "")
+			# print word
 		word = dictionary.get(word, word)
-		print word
-		# value of word in dictionary is a list of variable length
-		# translated_sentence = translated_sentence + " " + word
-	# print translated_sentence
+		# print type(word)
+		# if type(word) == "list":
+		# 	word = " ".join(word)
+		# 	print word
+		translation.append(word)
 
+	print translation
 
+	# return " ".join(translation)
 
-# translate_to_pirate("My boy is a real madam", pirate_dictionary)
+pirate_dictionary = make_dictionary(pirate_translations)
+translate("Get me a lawyer sir. I cannot abide this hotel.", pirate_dictionary)
 
 
 
