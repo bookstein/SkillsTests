@@ -22,35 +22,30 @@ def count_unique(string1):
 
 def count_unique_bonus(filename):
 	d = {}
-	f = open(filename)
-	text = f.read()
-	words = text.lower().split()
+	fin = open(filename)
 
-	for word in words:
-		word = word.strip(string.punctuation)
-		d[word] = d.get(word, 0) + 1
+	for line in fin:
+		line = line.replace("-", " ")
+		words = line.split()
+		#print words
+
+		for word in words:
+			word = word.strip(string.punctuation)
+			d[word] = d.get(word, 0) + 1
+
 	print d
 
-
-
-	# for word in words:
-	# 	for punc in string.punctuation:
-	# 		word = word.replace(punc, "")
-
-	# 	d[word] = d.get(word, 0) + 1
-
-	# print d
-
-count_unique_bonus("tester.txt")
-
+#count_unique_bonus("tester.txt")
 """
 Given two lists, (without using the keywords 'if __ in ____' or the method 'index')
 return a list of all common items shared between both lists
 """
 def common_items(list1, list2):
-	pass
+	set1, set2 = set(list1), set(list2)
+	common_elems = set1 & set2
+	return list(common_elems)
 
-# common_items(list1, list2)
+#print common_items(list1, list2)
 
 
 
@@ -60,9 +55,17 @@ return a list of all common items shared between both lists. This time,
 use a dictionary as part of your solution.
 """
 def common_items2(list1, list2):
-	pass
+	d = {}
+	for item in list1:
+		d[item] = d.get(item, 1)
+	for item in list2:
+		d[item] = d.get(item, 0) + 1
 
-# common_items2(list1, list2)
+	for key, val in d.iteritems():
+		if val == 2:
+			print key
+
+print common_items2(list1, list2)
 
 """
 Given a list of numbers, return list of number pairs that sum to zero
