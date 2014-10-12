@@ -172,15 +172,20 @@ def make_dictionary(translations):
 	translations = translations.strip()
 	# split up text into individual word pairs
 	word_pairs = translations.split('\n')
-	print word_pairs
+	# print word_pairs
 	# for each word pair, strip whitespace and split on tabs
-	for word_pair in word_pairs:
-		word_pair = word_pair.strip()
-		",".join(word_pair.split())
-		# word_pair = word_pair.replace(" ", "/")
-		word_pair = word_pair.split("\t")
-		# print type(word_pair)
-	print word_pairs
+	for i in range(len(word_pairs)):
+		# assigns to each position in word_pairs a list of correlated words
+		word_pairs[i] = word_pairs[i].split()
+		pirate_dictionary[word_pairs[i][0]] = word_pairs[i][1:]
+	print pirate_dictionary
+
+
+	# for i in range(len(word_pairs)):
+	# 	word_pairs[i].split(' \t\n\r')
+	# 	# pair = word_pairs[i].strip()
+	# 	# pair = pair.split(' \t\n\r')
+	# 	print word_pairs[i]
 
 
 	# print "dictionary ", pirate_dictionary
