@@ -6,45 +6,35 @@ another_number_list = [-5, 6, 4, 8, 15, 16, 23, 42, 2, 7, 1000]
 
 # Write a function that takes a list of numbers and returns a new list with only the odd numbers.
 def all_odd(number_list):
-    result = []
-    for num in number_list:
-        if num % 2 != 0:
-            result.append(num)
-    return result
+    return filter(lambda x: x % 2 != 0, number_list)
 
 answer = all_odd(number_list)
 print "All odds", answer
 
 # Write a function that takes a list of numbers and returns a new list with only the even numbers.
 def all_even(number_list):
-    result= []
-    for num in number_list:
-        if num % 2 ==0:
-            result.append(num)
-    return result
+    return filter(lambda x: x % 2 == 0, number_list)
 
 answer = all_even(number_list)
 print "All evens", answer
 
 # Write a function that takes a list of strings and a new list with all strings of length 4 or greater.
 def long_words(word_list):
-    str_lengths = []
-    for word in word_list:
-        if len(word) >= 4:
-            str_lengths.append(word)
-    return str_lengths
+    return filter(lambda x: len(x) >= 4, word_list)
 
 answer = long_words(word_list)
 print "Long words", answer
 
 # Write a function that finds the smallest element in a list of integers and returns it.
 def smallest(number_list):
-    for index in range(1, len(number_list)):
-        smallest = number_list[0]
-        if number_list[index] < smallest:
-            smallest = number_list[index]
-            print smallest
-    return smallest
+    def smaller_of_two(num1, num2):
+        if num1 <= num2:
+            return num1
+        else:
+            return num2
+    return reduce(smaller_of_two, number_list)
+
+
 
 answer = smallest(another_number_list)
 print "Smallest num", answer
@@ -52,13 +42,13 @@ print "Smallest num", answer
 
 # Write a function that finds the largest element in a list of integers and returns it.
 def largest(number_list):
-    largest = None
-    for index in range(len(number_list) - 1):
-        if number_list[index] > number_list[index +1]:
-            largest = number_list[index]
+    def larger_of_two(num1, num2):
+        if num1 >= num2:
+            return num1
         else:
-            largest = number_list[index +1]
-    return largest
+            return num2
+
+    return reduce(larger_of_two, number_list)
 
 answer = largest(another_number_list)
 print "Largest num", answer
@@ -66,61 +56,42 @@ print "Largest num", answer
 
 # Write a function that takes a list of numbers and returns a new list of all those numbers divided by two.
 def halvesies(number_list):
-    result = []
-    for index in range(len(number_list)):
-        result.append(number_list[index]/2.0)
-    return number_list
+    return map(lambda x: x/2, number_list)
 
 answer = halvesies(number_list)
 print "Halved nums", answer
 
 # Write a function that takes a list of words and returns a list of all the lengths of those words.
 def word_lengths(word_list):
-    result = []
-    for word in word_list:
-        result.append(len(word))
-    return result
+    return map(lambda x: len(x), word_list)
 
 answer = word_lengths(word_list)
 print "Word lengths", answer
 
 # Write a function (using iteration) that sums all the numbers in a list.
 def sum_numbers(number_list):
-    print number_list
-    total = 0
-    for num in number_list:
-        total += num
-    return total
+    return reduce(lambda x,y: x+y, number_list)
 
 answer = sum_numbers(number_list)
 print "Sums", answer
 
 # Write a function that multiplies all the numbers in a list together.
 def mult_numbers(number_list):
-    total = 1
-    for num in number_list:
-        total *= num
-    return total
+    return reduce(lambda x,y: x*y, number_list)
 
 answer = mult_numbers(number_list)
 print "Mult", answer
 
 # Write a function that joins all the strings in a list together (without using the join method) and returns a single string.
 def join_strings(word_list):
-    full_string = ""
-    for word in word_list:
-        full_string = full_string + "" + word
-    return full_string
+    return reduce(lambda fullstring, string: fullstring+string, word_list)
 
 answer = join_strings(word_list)
 print "Joined", answer
 
 # Write a function that takes a list of integers and returns the average (without using the avg method)
 def average(number_list):
-    total = 0
-    for num in number_list:
-        total += num
-    return total/(len(number_list))
+    return reduce(lambda x,y: (x+y)/2, number_list)
 
 answer = average(number_list)
 print "Avg", answer
