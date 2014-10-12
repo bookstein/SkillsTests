@@ -136,10 +136,7 @@ def make_dictionary(translations):
 		# to get rid of empty extra spaces inside word_pair list:
 		english = word_pair[0]
 		pirate = word_pair[-1]
-		word_pair = [english, pirate]
-
-		print word_pair
-		translation_dictionary[word_pair[0]] = word_pair[1:]
+		translation_dictionary[english] = pirate
 
 	return translation_dictionary
 
@@ -158,12 +155,11 @@ def translate(sentence, dictionary):
 
 		translation.append(word)
 
-	print translation
-
-	# return " ".join(translation)
+	return " ".join(translation)
 
 pirate_dictionary = make_dictionary(pirate_translations)
-translate("Get me a lawyer sir. I cannot abide this hotel.", pirate_dictionary)
+translation = translate("Get me a lawyer sir. I cannot abide this hotel.", pirate_dictionary)
+print translation
 
 
 
