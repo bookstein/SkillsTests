@@ -180,7 +180,7 @@ def make_dictionary(translations):
 		# word_pair = word_pair.replace(" ", "/")
 		word_pair = word_pair.split("\t")
 		# print type(word_pair)
-		print word_pair
+	print word_pairs
 
 
 	# print "dictionary ", pirate_dictionary
