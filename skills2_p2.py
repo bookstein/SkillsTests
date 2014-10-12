@@ -57,13 +57,15 @@ use a dictionary as part of your solution.
 def common_items2(list1, list2):
 	d = {}
 	for item in list1:
-		d[item] = d.get(item, 1)
+		d[item] = d.setdefault(item, 1)
 	for item in list2:
 		d[item] = d.get(item, 0) + 1
 
-	for key, val in d.iteritems():
-		if val == 2:
-			print key
+	common = []
+	for key, value in d.iteritems():
+		if value >= 2:
+			common.append(key)
+	return common
 
 print common_items2(list1, list2)
 
