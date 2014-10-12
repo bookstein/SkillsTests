@@ -1,122 +1,97 @@
-# string1 = "I do not like green eggs and ham. Do you like green eggs and ham?"
-# list1 = [2, 5, 12, 6, 1, -5, 8, 5, 6, -2, 2, 27]
-# list2 = [-5, 6, 4, 8, 15, 16, 23, 42, 2, 7]
-# words = ["I", "do", "not", "like", "green", "eggs", "and", "ham", "I", "do", "not", "like", "them", "Sam", "I", "am"]
+string1 = "I do not like green eggs and ham. Do you like green eggs and ham?"
+list1 = [2, 5, 12, 6, 1, -5, 8, 5, 6, -2, 2, 27]
+list2 = [-5, 6, 4, 8, 15, 16, 23, 42, 2, 7]
+words = ["I", "do", "not", "like", "green", "eggs", "and", "ham", "I", "do", "not", "like", "them", "Sam", "I", "am"]
 
-# """
-# Write a function that takes a string and produces a dictionary with
-# all distinct elements as the keys, and the number of each element as
-# the value
-# Bonus: do the same for a file (i.e. twain.txt)
-# """
-# def count_unique(string1):
-# 	d = {}
-# 	word_list = string1.lower().split()
-# 	for word in word_list:
-# 		if d.get(word):
-# 			d[word]+=1
-# 		else:
-# 			d.setdefault(word, 1)
-# 	return d
+"""
+Write a function that takes a string and produces a dictionary with
+all distinct elements as the keys, and the number of each element as
+the value
+Bonus: do the same for a file (i.e. twain.txt)
+"""
+def count_unique(string1):
+	d = {}
 
-# # count_unique(string1)
+	words = string1.split()
+	for word in words:
+		d[word] = d.get(word, 0) + 1
 
-# """
-# Given two lists, (without using the keywords 'if __ in ____' or the method 'index')
-# return a list of all common items shared between both lists
-# """
-# def common_items(list1, list2):
-# 	d = {}
-# 	results = []
-# 	# key in dict --> returns True if key is present, but I'm not allowed this
-# 	for item in list1:
-# 		d[item] = 1
-# 	for item in list2:
-# 		if d.get(item):
-# 			results.append(item)
+	print d
 
-# 	print results
+# count_unique(string1)
 
-# # common_items(list1, list2)
+"""
+Given two lists, (without using the keywords 'if __ in ____' or the method 'index')
+return a list of all common items shared between both lists
+"""
+def common_items(list1, list2):
+	list1_items = set(list1)
+	list2_items = set(list2)
+
+	print list1_items & list2_items
+
+# common_items(list1, list2)
 
 
 
-# """
-# Given two lists, (without using 'if __ in ____' or 'index')
-# return a list of all common items shared between both lists. This time,
-# use a dictionary as part of your solution.
-# """
-# def common_items2(list1, list2):
-# 	d = {}
-# 	results = []
-# 	for item in list1:
-# 		d[item] = 1
-# 	for item in list2:
-# 		if d.get(item):
-# 			results.append(item)
+"""
+Given two lists, (without using 'if __ in ____' or 'index')
+return a list of all common items shared between both lists. This time,
+use a dictionary as part of your solution.
+"""
+def common_items2(list1, list2):
+	d = {}
+	for item in list1:
+		if item in list2:
+			d[item] = d.get(item, 0) + 1
 
-# 	print results
+	print sorted(d.keys())
 
-# # common_items2(list1, list2)
+# common_items2(list1, list2)
 
-# """
-# Given a list of numbers, return list of number pairs that sum to zero
-# """
-# def sum_zero(list1):
-# 	d = {}
-# 	results = []
-# 	#make tuples of nums that sum to zero
-# 	for idx in range(len(list1)):
-# 		for idx_2 in range(len(list1)):
-# 			if list1[idx] + list1[idx_2] == 0:
-# 				d[list1[idx]] = d.get(list1[idx], list1[idx_2])
+"""
+Given a list of numbers, return list of number pairs that sum to zero
+"""
+def sum_zero(list1):
+	d = {}
 
-# 	for key in d.keys():
-# 		results.append((key, d[key]))
-
-# 	print results
-
-# # sum_zero(list1)
-
-# """
-# Given a list of words, return a list of words with duplicates removed
-# """
-# def find_duplicates(words):
-# 	d = {}
-# 	results = []
-# 	for word in words:
-# 	# .get RETURNS the value of the key. If key not available, RETURNS None.
-# 		d[word] = 1
-# 	for key in d.keys():
-# 		results.append(key)
-
-# 	print d
-# 	print results
-
-# # find_duplicates(words)
+	for num in list1:
+		for idx in range(len(list1)):
+			if num + list1[idx] == 0:
+				d[num] = list1[idx]
+	print d
 
 
-# """
-# Given a list of words, print the words in ascending order of length
-# Bonus: do it on a file instead of the list provided
-# Bonus: print the words in alphabetical order in ascending order of length
-# """
-# def word_length(words):
-# 	d = {}
+# sum_zero(list1)
 
-# 	for word in words:
-# 		# length = len(word)
-# 		# d[length] = d.setdefault(length, word)
-# 		word = word.lower()
-# 		d[word] = len(word)
+"""
+Given a list of words, return a list of words with duplicates removed
+"""
+def find_duplicates(words):
+	d = {}
+	for word in words:
+		d[word] = d.get(word, 0)
 
-# 	tuples = d.items()
-# 	print tuples
+	print d.keys()
+
+# find_duplicates(words)
 
 
+"""
+Given a list of words, print the words in ascending order of length
+Bonus: do it on a file instead of the list provided
+Bonus: print the words in alphabetical order in ascending order of length
+"""
+def word_length(words):
+	d = {}
 
+	for word in words:
+		d[word] = len(word)
 
-# word_length(words)
+	for key, value in sorted(d.items(), key = lambda x: x[1], reverse = False):
+		print key, value
+
+word_length(words)
 
 
 """
@@ -188,7 +163,7 @@ def make_dictionary(translations):
 	# 	# pair = pair.split(' \t\n\r')
 	# 	print word_pairs[i]
 
-pirate_dictionary = make_dictionary(pirate_translations)
+# pirate_dictionary = make_dictionary(pirate_translations)
 
 def translate_to_pirate(sentence, dictionary):
 	translated_sentence = ""
@@ -202,7 +177,7 @@ def translate_to_pirate(sentence, dictionary):
 
 
 
-translate_to_pirate("My boy is a real madam", pirate_dictionary)
+# translate_to_pirate("My boy is a real madam", pirate_dictionary)
 
 
 
