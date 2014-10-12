@@ -167,7 +167,7 @@ pirate_translations = """
 	"""
 
 def make_dictionary(translations):
-	pirate_dictionary = {}
+	dictionary = {}
 
 	translations = translations.strip()
 	# split up text into individual word pairs
@@ -177,9 +177,10 @@ def make_dictionary(translations):
 	for i in range(len(word_pairs)):
 		# assigns to each position in word_pairs a list of correlated words
 		word_pairs[i] = word_pairs[i].split()
-		pirate_dictionary[word_pairs[i][0]] = word_pairs[i][1:]
-	print pirate_dictionary
+		dictionary[word_pairs[i][0]] = word_pairs[i][1:]
+	# print dictionary
 
+	return dictionary
 
 	# for i in range(len(word_pairs)):
 	# 	word_pairs[i].split(' \t\n\r')
@@ -187,13 +188,21 @@ def make_dictionary(translations):
 	# 	# pair = pair.split(' \t\n\r')
 	# 	print word_pairs[i]
 
+pirate_dictionary = make_dictionary(pirate_translations)
 
-	# print "dictionary ", pirate_dictionary
+def translate_to_pirate(sentence, dictionary):
+	translated_sentence = ""
+	sentence = sentence.split()
+	for word in sentence:
+		word = dictionary.get(word, word)
+		print word
+		# value of word in dictionary is a list of variable length
+		# translated_sentence = translated_sentence + " " + word
+	# print translated_sentence
 
-make_dictionary(pirate_translations)
 
-# def translate_to_pirate(string, dictionary):
-# 	for word in
+
+translate_to_pirate("My boy is a real madam", pirate_dictionary)
 
 
 
