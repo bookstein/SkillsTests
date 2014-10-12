@@ -131,8 +131,14 @@ def make_dictionary(translations):
 
 	for word_pair in translations:
 		word_pair = word_pair.strip()
-		word_pair = word_pair.split()
-		# print word_pair
+		# splits word pairs apart by double-spaces
+		word_pair = word_pair.split("  ")
+		# to get rid of empty extra spaces inside word_pair list:
+		english = word_pair[0]
+		pirate = word_pair[-1]
+		word_pair = [english, pirate]
+
+		print word_pair
 		translation_dictionary[word_pair[0]] = word_pair[1:]
 
 	return translation_dictionary
@@ -149,10 +155,7 @@ def translate(sentence, dictionary):
 			word = word.replace(punc, "")
 			# print word
 		word = dictionary.get(word, word)
-		# print type(word)
-		# if type(word) == "list":
-		# 	word = " ".join(word)
-		# 	print word
+
 		translation.append(word)
 
 	print translation
