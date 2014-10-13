@@ -76,14 +76,10 @@ def common_items2(list1, list2):
 Given a list of numbers, return list of number pairs that sum to zero
 """
 def sum_zero(list1):
-	solutions = []
+	solutions = {}
 	for num in list1:
-		neg = -1*num
-		if neg in list1 and neg not in solutions:
-			solutions.append(neg)
-		# for index in range(len(list1)):
-		# 	if num + list1[index] == 0:
-		# 		solutions.append((num, list1[index]))
+		if -1*num in list1:
+			solutions[num] = solutions.get(num, num*-1)
 
 	return solutions
 
