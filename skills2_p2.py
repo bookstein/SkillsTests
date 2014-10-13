@@ -62,7 +62,7 @@ def common_items2(list1, list2):
 		d[item] = d.get(item, 0) + 1
 
 	l = []
-	for k, v in d.iteritems():
+	for k, v in d.items():
 		if v >= 2:
 			l.append(k)
 	return l
@@ -70,16 +70,26 @@ def common_items2(list1, list2):
 
 
 
-print common_items2(list1, list2)
+# print common_items2(list1, list2)
 
 """
 Given a list of numbers, return list of number pairs that sum to zero
 """
 def sum_zero(list1):
-	pass
+	solutions = []
+	for num in list1:
+		neg = -1*num
+		if neg in list1 and neg not in solutions:
+			solutions.append(neg)
+		# for index in range(len(list1)):
+		# 	if num + list1[index] == 0:
+		# 		solutions.append((num, list1[index]))
+
+	return solutions
 
 
-# sum_zero(list1)
+
+print sum_zero(list1)
 
 """
 Given a list of words, return a list of words with duplicates removed
