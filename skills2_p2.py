@@ -86,15 +86,19 @@ def sum_zero(list1):
 	return results
 
 
-print sum_zero(list1)
+#print sum_zero(list1)
 
 """
 Given a list of words, return a list of words with duplicates removed
 """
 def find_duplicates(words):
-	pass
+	d = {}
+	for word in words:
+		word = word.lower()
+		d[word] = d.get(word, 0)
+	return d.keys()
 
-# find_duplicates(words)
+# print find_duplicates(words)
 
 
 """
@@ -103,9 +107,14 @@ Bonus: do it on a file instead of the list provided
 Bonus: print the words in alphabetical order in ascending order of length
 """
 def word_length(words):
-	pass
+	d = {}
+	for word in words:
+		d[word] = d.get(word, len(word))
 
-# word_length(words)
+	for item in sorted(d.items(), key = lambda x: x[1]):
+		print item[0], item[1]
+
+print word_length(words)
 
 import string
 
