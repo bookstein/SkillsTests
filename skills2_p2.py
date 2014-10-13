@@ -61,11 +61,14 @@ def common_items2(list1, list2):
 	for item in list2:
 		d[item] = d.get(item, 0) + 1
 
-	common = []
-	for key, value in d.iteritems():
-		if value >= 2:
-			common.append(key)
-	return common
+	l = []
+	for k, v in d.iteritems():
+		if v >= 2:
+			l.append(k)
+	return l
+
+
+
 
 print common_items2(list1, list2)
 
