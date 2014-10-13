@@ -111,10 +111,10 @@ def word_length(words):
 	for word in words:
 		d[word] = d.get(word, len(word))
 
-	for item in sorted(d.items(), key = lambda x: x[1]):
-		print item[0], item[1]
+	for word, length in sorted(d.items(), key=lambda x: x[1]):
+		print word
 
-print word_length(words)
+word_length(words)
 
 import string
 
