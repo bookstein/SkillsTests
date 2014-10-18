@@ -14,19 +14,19 @@ import sqlite3
 DB = None
 CONN = None
 
-# #Class definition to store our customer data
-# class Customer(object):
-# 	def __init__(self, id=None, first=None, last=None, telephone=None):
-# 		self.first = ''
-# 		self.last = ''
-# 		self.telephone = ''
-# 		pass
+#Class definition to store our customer data
+class Customer(object):
+	def __init__(self, id=None, first=None, last=None, telephone=None):
+		self.first = ''
+		self.last = ''
+		self.telephone = ''
+		pass
 
-# 	def __str__(self):
-# 		output = " Name: %s, %s\n" % (self.last, self.first)
-# 		output += "Phone: %s" % self.telephone
+	def __str__(self):
+		output = " Name: %s, %s\n" % (self.last, self.first)
+		output += "Phone: %s" % self.telephone
 
-# 		return output
+		return output
 
 # Connect to the Database
 def connect_to_db():
@@ -36,46 +36,53 @@ def connect_to_db():
 	DB = CONN.cursor()
 
 
-# #Retrieve the next uncontacted customer record from the database.
-# #Return the data in a Customer class object.
-#
+#Retrieve the next uncontacted customer record from the database.
+#Return the data in a Customer class object.
+
 # Remember: Our telemarketers should only be calling customers
 #           who have placed orders of 20 melons or more.
-# def get_next_customer():
-# 	c = Customer()
-
-# 	return c
-
-
-# def display_next_to_call(customer):
-# 	print "---------------------"
-# 	print "Next Customer to call"
-# 	print "---------------------\n"
-# 	print customer
-# 	print "\n"
+def get_next_customer(c_id):
+	c = Customer(id=c_id)
+	print c
+	query = """SELECT * FROM customers WHERE id = ?"""
+	DB.execute(query, (c_id, ))
+	row = DB.fetchone()
+	print row
 
 
-# # Update the "last called" column for the customer
-# #   in the database.
-# def update_customer_called(customer):
-# 	pass
+	print "customer: ", c
+
+
+def display_next_to_call(customer):
+	print "---------------------"
+	print "Next Customer to call"
+	print "---------------------\n"
+	print customer
+	print "\n"
+
+
+# Update the "last called" column for the customer
+#   in the database.
+def update_customer_called(customer):
+	pass
 
 def main():
 	connect_to_db()
 
-	# done = False
+	done = False
 
 	# while not done:
-	# 	customer = get_next_customer()
-	# 	display_next_to_call(customer)
+	c_id = 1
+	customer = get_next_customer(c_id)
+		# display_next_to_call(customer)
 
-	# 	print "Mark this customer as called?"
-	# 	user_answer = raw_input('(y/n) > ')
+		# print "Mark this customer as called?"
+		# user_answer = raw_input('(y/n) > ')
 
-	# 	if user_answer.lower() == 'y':
-	# 		update_customer_called(customer)
-	# 	else:
-	# 		done = True
+		# if user_answer.lower() == 'y':
+		# 	update_customer_called(customer)
+		# else:
+		# 	done = True
 
 
 if __name__ == '__main__':
