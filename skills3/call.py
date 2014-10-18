@@ -43,14 +43,14 @@ def connect_to_db():
 #           who have placed orders of 20 melons or more.
 def get_next_customer(c_id):
 	c = Customer(id=c_id)
-	print c
 	query = """SELECT * FROM customers WHERE id = ?"""
 	DB.execute(query, (c_id, ))
 	row = DB.fetchone()
-	print row
+	c.first = row[2]
+	c.last = row[3]
+	c.telephone = row[5]
 
-
-	print "customer: ", c
+	print c
 
 
 def display_next_to_call(customer):
