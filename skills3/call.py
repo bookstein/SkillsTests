@@ -1,8 +1,8 @@
 """
-call.py - Telemarketing script that displays the next name 
+call.py - Telemarketing script that displays the next name
           and phone number of a Customer to call.
 
-          This script is used to drive promotions for 
+          This script is used to drive promotions for
           specific customers based on their order history.
           We only want to call customers that have placed
           an order of over 20 Watermelons.
@@ -13,6 +13,11 @@ import sqlite3
 
 DB = None
 CONN = None
+
+# Make the database from CSV files
+
+def populate_database(filename):
+	query = """INSERT INTO
 
 # Class definition to store our customer data
 class Customer(object):
