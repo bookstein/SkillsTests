@@ -50,7 +50,7 @@ def populate_customers_table(filename):
 		customer_record = line.strip().split(",")
 		cid, first, last, email, telephone, called = customer_record
 		if len(customer_record[5]) < 1:
-			customer_record[5] = "00/00/00"
+			customer_record[5] = "00/00/00" # did this not work??
 		print "Added row: ", customer_record
 		DB.execute(query, (email, first, last, telephone, called))
 	CONN.commit()

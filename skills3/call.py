@@ -45,18 +45,19 @@ def connect_to_db():
 
 # Remember: Our telemarketers should only be calling customers
 #           who have placed orders of 20 melons or more.
-def get_next_customer(c_id):
-	c = Customer(id=c_id)
-	query = """SELECT * FROM customers WHERE id = ?"""
-	DB.execute(query, (c_id, ))
+def get_next_customer():
+	c = Customer()
+	not_called = ""
+	query = """SELECT * FROM customers WHERE called = ?"""
+	DB.execute(query, (not_called,))
 	row = DB.fetchone()
 	c.id = row[0]
 	c.first = row[2]
 	c.last = row[3]
 	c.telephone = row[5]
 	c.called = row[6]
-
-	return c
+	print "row ", row
+	# return c
 
 
 def display_next_to_call(customer):
@@ -83,11 +84,10 @@ def main():
 	c_id = 0
 	today = date.today().strftime("%m/%d/%Y")
 	# mimic 04/01/2014 for date called
-	print today
 
 	while not done:
 		c_id += 1
-		customer = get_next_customer(c_id)
+		customer = get_next_customer()
 		display_next_to_call(customer)
 
 		print "Mark this customer as called?"
