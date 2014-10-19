@@ -10,7 +10,7 @@ call.py - Telemarketing script that displays the next name
 """
 
 import sqlite3
-from datetime import date
+from datetime import date, timedelta
 
 DB = None
 CONN = None
@@ -50,19 +50,21 @@ def connect_to_db():
 #           who have placed orders of 20 melons or more.
 
 
-def get_next_customer():
+def get_next_customer(time):
 	c = Customer()
+
 	not_called = ""
+
 	query = """SELECT * FROM customers
 		LEFT JOIN orders
 		ON (customers.id = orders.customer_id)
-		WHERE called = ?
+		WHERE (called = ? OR called < ?)
 		AND (num_watermelons + num_othermelons >= 20)"""
 
 		# sample row
 		# 1|julia@roomm.gov|Linda|Garrett||8-(184)172-2138|10/19/2014||||||||||2354|1|Canceled||89 Cody Court||Woodland|FL|29208|58|0|136|8.16|||156.42|
 
-	DB.execute(query, (not_called,))
+	DB.execute(query, (not_called, time))
 	row = DB.fetchone()
 	c.id = row[0]
 	c.first = row[2]
@@ -93,14 +95,15 @@ def update_customer_called(date, customer):
 def main():
 	connect_to_db()
 
+	today = date.today()
+	# .strftime("%m/%d/%Y")
+		# mimic 04/01/2014
+	thirty_days_ago = today + timedelta(-30)
+
 	done = False
-	c_id = 0
-	today = date.today().strftime("%m/%d/%Y")
-	# mimic 04/01/2014 for date called
 
 	while not done:
-		c_id += 1
-		customer = get_next_customer()
+		customer = get_next_customer(thirty_days_ago)
 		display_next_to_call(customer)
 
 		print "Mark this customer as called?"
