@@ -106,10 +106,25 @@ def populate_orders_table(filename):
 	CONN.commit()
 	f.close()
 
+def make_top_customers_view():
+	"""Create new view that defines top customers.
+	In this case, top customers made purchases of more than
+	20 melons of any type."""
+	query = """
+		DROP VIEW top_customers;
+		CREATE VIEW top_customers AS
+		SELECT * FROM customers LEFT JOIN orders
+		ON (orders.customer_id = customers.id)
+		WHERE (num_watermelons + num_othermelons >= 20)
+		"""
+	DB.execute(query)
+	print "Dropped old top customers view/Added top customers view."
+	CONN.commit()
 
 def main():
 	connect_to_db()
 	# populate_customers_table("customers.csv")
+	make_top_customers_view()
 	populate_orders_table("orders.csv")
 
 if __name__ == "__main__":
