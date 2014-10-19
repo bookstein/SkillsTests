@@ -50,7 +50,11 @@ def connect_to_db():
 def get_next_customer():
 	c = Customer()
 	not_called = ""
-	query = """SELECT * FROM top_customers WHERE called = ?"""
+	query = """SELECT * FROM customers
+		LEFT JOIN orders
+		ON (customers.id = orders.customer_id)
+		WHERE called = ?
+		AND (num_watermelons + num_othermelons >= 20)"""
 	DB.execute(query, (not_called,))
 	row = DB.fetchone()
 	c.id = row[0]
