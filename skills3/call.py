@@ -48,7 +48,7 @@ def connect_to_db():
 def get_next_customer():
 	c = Customer()
 	not_called = ""
-	query = """SELECT * FROM customers WHERE called = ?"""
+	query = """SELECT * FROM customers WHERE called = ? AND """
 	DB.execute(query, (not_called,))
 	row = DB.fetchone()
 	c.id = row[0]

@@ -70,6 +70,8 @@ def populate_orders_table(filename):
 		shipto_city VARCHAR(35),
 		shipto_state VARCHAR(35),
 		shipto_postalcode VARCHAR(10),
+		num_watermelons INTEGER,
+		num_othermelons INTEGER,
 		subtotal NUMERIC(10, 2),
 		tax NUMERIC(10, 2),
 		delivery_method VARCHAR(20),
@@ -81,8 +83,8 @@ def populate_orders_table(filename):
 		""")
 
 	query = """INSERT INTO orders (customer_id, status, shipto_address1, shipto_city,
-		shipto_state, shipto_postalcode, subtotal, tax, order_total)
-		VALUES (?,?,?,?,?,?,?,?,?)"""
+		shipto_state, shipto_postalcode, num_watermelons, num_othermelons,
+		subtotal, tax, order_total) VALUES (?,?,?,?,?,?,?,?,?,?,?)"""
 
 	# gets first row of file -- headers -- this was causing an error in datatype
 	header = f.readline().rstrip().split(",")
@@ -92,18 +94,22 @@ def populate_orders_table(filename):
 		order_record = line.strip().split(",")
 
 		#unpack order_record from csv
-		order_id, order_date, status, customer_id, email, address, city, state, postalcode, num_watermelons, num_othermelons, subtotal, tax, order_total = order_record
+		(order_id, order_date, status, customer_id, email, address, city, state,
+		 postalcode, num_watermelons, num_othermelons,
+		 subtotal, tax, order_total) = order_record
 		print order_record
 		# execute query for each record
 		# columns in table that are not given value will have Null value
-		DB.execute(query, (customer_id, status, address, city, state, postalcode, subtotal, tax, order_total))
+		DB.execute(query, (customer_id, status, address, city, state,
+			postalcode, num_watermelons, num_othermelons, subtotal,
+			tax, order_total))
 	CONN.commit()
 	f.close()
 
 
 def main():
 	connect_to_db()
-	populate_customers_table("customers.csv")
+	# populate_customers_table("customers.csv")
 	populate_orders_table("orders.csv")
 
 if __name__ == "__main__":
