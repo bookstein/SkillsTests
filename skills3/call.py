@@ -17,18 +17,21 @@ CONN = None
 
 #Class definition to store our customer data
 class Customer(object):
-	def __init__(self, id=None, first=None, last=None, telephone=None, called=None):
+	def __init__(self, id=None, first=None, last=None, telephone=None,
+		called=None, melons=None):
 		self.id = ''
 		self.first = ''
 		self.last = ''
 		self.telephone = ''
 		self.called = ''
+		self.melons = ''
 
 	def __str__(self):
 		output = " Name: %s, %s\n" % (self.last, self.first)
 		output += "Phone: %s\n" % self.telephone
 		output += "ID: %s\n" % self.id
-		output += "Last called: %s" % self.called
+		output += "Last called: %s\n" % self.called
+		output += "Melons purchased: %s" % self.melons
 
 		return output
 
@@ -55,6 +58,10 @@ def get_next_customer():
 		ON (customers.id = orders.customer_id)
 		WHERE called = ?
 		AND (num_watermelons + num_othermelons >= 20)"""
+
+		# sample row
+		# 1|julia@roomm.gov|Linda|Garrett||8-(184)172-2138|10/19/2014||||||||||2354|1|Canceled||89 Cody Court||Woodland|FL|29208|58|0|136|8.16|||156.42|
+
 	DB.execute(query, (not_called,))
 	row = DB.fetchone()
 	c.id = row[0]
@@ -62,6 +69,7 @@ def get_next_customer():
 	c.last = row[3]
 	c.telephone = row[5]
 	c.called = row[6]
+	c.melons = int(row[25]) + int(row[26])
 	return c
 
 
