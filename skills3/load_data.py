@@ -110,22 +110,26 @@ def make_top_customers_view():
 	"""Create new view that defines top customers.
 	In this case, top customers made purchases of more than
 	20 melons of any type."""
-	query = """
-		DROP VIEW top_customers;
-		CREATE VIEW top_customers AS
+	# drop pre-existing top_customers view to avoid errors
+	# query = """DROP VIEW top_customers"""
+	# DB.execute(query)
+	# CONN.commit()
+
+	# create new top_customers view
+	query = """CREATE VIEW top_customers AS
 		SELECT * FROM customers LEFT JOIN orders
 		ON (orders.customer_id = customers.id)
 		WHERE (num_watermelons + num_othermelons >= 20)
 		"""
 	DB.execute(query)
-	print "Dropped old top customers view/Added top customers view."
+	print "Added top customers view."
 	CONN.commit()
 
 def main():
 	connect_to_db()
-	# populate_customers_table("customers.csv")
-	make_top_customers_view()
+	populate_customers_table("customers.csv")
 	populate_orders_table("orders.csv")
+	make_top_customers_view()
 
 if __name__ == "__main__":
 	main()
