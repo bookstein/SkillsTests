@@ -45,10 +45,22 @@ def connect_to_db():
 
 # Remember: Our telemarketers should only be calling customers
 #           who have placed orders of 20 melons or more.
+
+def make_top_orders_view():
+	"""Create new view that defines top orders.
+	In this case, top order involve purchases of more than
+	20 melons of any type."""
+	query = """CREATE VIEW top_orders AS
+		SELECT * FROM orders WHERE (num_watermelons + num_othermelons >= 20)
+		"""
+	DB.execute(query)
+	print "Added orders view."
+	CONN.commit()
+
 def get_next_customer():
 	c = Customer()
 	not_called = ""
-	query = """SELECT * FROM customers WHERE called = ? AND """
+	query = """SELECT * FROM customers WHERE called = ?"""
 	DB.execute(query, (not_called,))
 	row = DB.fetchone()
 	c.id = row[0]
@@ -78,6 +90,7 @@ def update_customer_called(date, customer):
 
 def main():
 	connect_to_db()
+	make_top_orders_view()
 
 	done = False
 	c_id = 0
