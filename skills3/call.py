@@ -56,8 +56,7 @@ def get_next_customer():
 	c.last = row[3]
 	c.telephone = row[5]
 	c.called = row[6]
-	print "row ", row
-	# return c
+	return c
 
 
 def display_next_to_call(customer):
