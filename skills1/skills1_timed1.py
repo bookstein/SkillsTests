@@ -6,34 +6,33 @@ another_number_list = [-5, 6, 4, 8, 15, 16, 23, 42, 2, 7, 1000]
 
 # Write a function that takes a list of numbers and returns a new list with only the odd numbers.
 def all_odd(number_list):
-    return filter(lambda x: x % 2 != 0, number_list)
+    return filter(lambda num: num%2 != 0, number_list)
 
 answer = all_odd(number_list)
 print "All odds", answer
 
 # Write a function that takes a list of numbers and returns a new list with only the even numbers.
 def all_even(number_list):
-    return filter(lambda x: x % 2 == 0, number_list)
+    return filter(lambda num: num%2 == 0, number_list)
 
 answer = all_even(number_list)
 print "All evens", answer
 
 # Write a function that takes a list of strings and a new list with all strings of length 4 or greater.
 def long_words(word_list):
-    return filter(lambda x: len(x) >= 4, word_list)
+    return filter(lambda x: len(x)>4, word_list)
 
 answer = long_words(word_list)
 print "Long words", answer
 
 # Write a function that finds the smallest element in a list of integers and returns it.
 def smallest(number_list):
-    def smaller_of_two(num1, num2):
-        if num1 <= num2:
+    def smaller(num1, num2):
+        if num1 < num2:
             return num1
         else:
             return num2
-    return reduce(smaller_of_two, number_list)
-
+    return reduce(smaller, number_list)
 
 
 answer = smallest(another_number_list)
@@ -42,13 +41,12 @@ print "Smallest num", answer
 
 # Write a function that finds the largest element in a list of integers and returns it.
 def largest(number_list):
-    def larger_of_two(num1, num2):
-        if num1 >= num2:
+    def larger(num1, num2):
+        if num1 > num2:
             return num1
         else:
             return num2
-
-    return reduce(larger_of_two, number_list)
+    return reduce(larger, number_list)
 
 answer = largest(another_number_list)
 print "Largest num", answer
@@ -56,7 +54,7 @@ print "Largest num", answer
 
 # Write a function that takes a list of numbers and returns a new list of all those numbers divided by two.
 def halvesies(number_list):
-    return map(lambda x: x/2, number_list)
+    return map(lambda x: x/2.0, number_list)
 
 answer = halvesies(number_list)
 print "Halved nums", answer
@@ -70,6 +68,7 @@ print "Word lengths", answer
 
 # Write a function (using iteration) that sums all the numbers in a list.
 def sum_numbers(number_list):
+
     return reduce(lambda x,y: x+y, number_list)
 
 answer = sum_numbers(number_list)
@@ -84,7 +83,7 @@ print "Mult", answer
 
 # Write a function that joins all the strings in a list together (without using the join method) and returns a single string.
 def join_strings(word_list):
-    return reduce(lambda fullstring, string: fullstring+string, word_list)
+    return reduce(lambda x, y: x + y, word_list)
 
 answer = join_strings(word_list)
 print "Joined", answer
@@ -95,3 +94,6 @@ def average(number_list):
 
 answer = average(number_list)
 print "Avg", answer
+
+
+
