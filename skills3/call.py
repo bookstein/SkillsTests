@@ -50,7 +50,7 @@ def connect_to_db():
 #           who have placed orders of 20 melons or more.
 
 
-def get_next_customer(time):
+def get_next_customer():
 	c = Customer()
 
 	not_called = ""
@@ -58,13 +58,13 @@ def get_next_customer(time):
 	query = """SELECT * FROM customers
 		LEFT JOIN orders
 		ON (customers.id = orders.customer_id)
-		WHERE (called = ? OR called < ?)
+		WHERE called = ?
 		AND (num_watermelons + num_othermelons >= 20)"""
 
 		# sample row
 		# 1|julia@roomm.gov|Linda|Garrett||8-(184)172-2138|10/19/2014||||||||||2354|1|Canceled||89 Cody Court||Woodland|FL|29208|58|0|136|8.16|||156.42|
 
-	DB.execute(query, (not_called, time))
+	DB.execute(query, (not_called,))
 	row = DB.fetchone()
 	c.id = row[0]
 	c.first = row[2]
@@ -85,32 +85,32 @@ def display_next_to_call(customer):
 
 # Update the "last called" column for the customer
 #   in the database.
-def update_customer_called(date, customer):
+def update_customer_called(customer):
+	today = date.today()
+	# .strftime("%m/%d/%Y")
+		# mimic 04/01/2014
+	# thirty_days_ago = today + timedelta(-30)
+
 	query = """UPDATE customers SET called = ? WHERE id = ?"""
-	DB.execute(query, (date, customer.id))
-	customer.called = date
+	DB.execute(query, (today, customer.id))
+	customer.called = today
 	print customer
 	CONN.commit()
 
 def main():
 	connect_to_db()
 
-	today = date.today()
-	# .strftime("%m/%d/%Y")
-		# mimic 04/01/2014
-	thirty_days_ago = today + timedelta(-30)
-
 	done = False
 
 	while not done:
-		customer = get_next_customer(thirty_days_ago)
+		customer = get_next_customer()
 		display_next_to_call(customer)
 
 		print "Mark this customer as called?"
 		user_answer = raw_input('(y/n) > ')
 
 		if user_answer.lower() == 'y':
-			update_customer_called(today, customer)
+			update_customer_called(customer)
 		else:
 			done = True
 
