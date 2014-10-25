@@ -13,10 +13,12 @@ def count_unique(string1):
 	d = {}
 
 	words = string1.split()
+
 	for word in words:
 		d[word] = d.get(word, 0) + 1
 
 	print d
+	pass
 
 # count_unique(string1)
 
@@ -24,11 +26,28 @@ def count_unique(string1):
 Given two lists, (without using the keywords 'if __ in ____' or the method 'index')
 return a list of all common items shared between both lists
 """
-def common_items(list1, list2):
-	list1_items = set(list1)
-	list2_items = set(list2)
 
-	print list1_items & list2_items
+# This took a long time to figure out the logic. Get a code review??
+def common_items(list1, list2):
+	d = {}
+	results = []
+
+	for item1 in list1:
+		# all items from list1 have value 1
+		d[item1] = 1
+	for item2 in list2:
+	# 	# if item2 is already in d, will return 1 and add 1. If not, 0 + 1.
+		d[item2] = d.get(item2, 0) + 1
+
+	print d
+
+	for key in d.keys():
+		if d[key] >= 2:
+
+			results.append(key)
+
+	print results
+	pass
 
 # common_items(list1, list2)
 
@@ -41,11 +60,19 @@ use a dictionary as part of your solution.
 """
 def common_items2(list1, list2):
 	d = {}
-	for item in list1:
-		if item in list2:
-			d[item] = d.get(item, 0) + 1
 
-	print sorted(d.keys())
+	results = []
+
+	for item in list1:
+		d[item] = d.setdefault(item, 1)
+	for item in list2:
+		d[item] = d.get(item, 0) + 1
+
+	for key in d.keys():
+		if d[key] >= 2:
+			results.append(key)
+
+	print results
 
 # common_items2(list1, list2)
 
@@ -54,13 +81,17 @@ Given a list of numbers, return list of number pairs that sum to zero
 """
 def sum_zero(list1):
 	d = {}
+	results = []
 
 	for num in list1:
-		for idx in range(len(list1)):
-			if num + list1[idx] == 0:
-				d[num] = list1[idx]
-	print d
+		if (-num) in list1:
+			d[num] = (-num)
 
+	for key in d.keys():
+		results.append((key, d[key]))
+
+	print results
+	pass
 
 # sum_zero(list1)
 
@@ -69,10 +100,17 @@ Given a list of words, return a list of words with duplicates removed
 """
 def find_duplicates(words):
 	d = {}
-	for word in words:
-		d[word] = d.get(word, 0)
+	results = []
 
-	print d.keys()
+	for word in words:
+		d[word] = d.get(word, 0) + 1
+
+	for key in d.keys():
+		if d[key] > 1:
+			results.append(key)
+
+	print results
+	pass
 
 # find_duplicates(words)
 
@@ -82,16 +120,21 @@ Given a list of words, print the words in ascending order of length
 Bonus: do it on a file instead of the list provided
 Bonus: print the words in alphabetical order in ascending order of length
 """
+
+#couldn't remember how to use sorted() with correct key/lambda
 def word_length(words):
 	d = {}
 
 	for word in words:
-		d[word] = len(word)
+		d[word] = d.get(word, len(word))
 
-	for key, value in sorted(d.items(), key = lambda x: x[1], reverse = False):
-		print key, value
+	# print d.items()
 
-# word_length(words)
+	for key, value in sorted(d.items(), key = lambda wordpair: wordpair[1]):
+		print key
+	pass
+
+word_length(words)
 
 import string
 
@@ -121,45 +164,6 @@ man         matey
 """
 
 def make_dictionary(translations):
-	translation_dictionary = {}
-
-	translations = translations.strip()
-	# print translations
-	translations = translations.split('\n')
-	# print translations
-
-
-	for word_pair in translations:
-		word_pair = word_pair.strip()
-		# splits word pairs apart by double-spaces
-		word_pair = word_pair.split("  ")
-		# to get rid of empty extra spaces inside word_pair list:
-		english = word_pair[0]
-		pirate = word_pair[-1]
-		translation_dictionary[english] = pirate
-
-	return translation_dictionary
-
-def translate(sentence, dictionary):
-	sentence = sentence.strip()
-	words = sentence.split()
-
-	translation = []
-	for word in words:
-		# to remove punctuation from word for dictionary lookup:
-		# however, this is inefficient and runs through each word multiple times
-		for punc in string.punctuation:
-			word = word.replace(punc, "")
-			# print word
-		word = dictionary.get(word, word)
-
-		translation.append(word)
-
-	return " ".join(translation)
-
-pirate_dictionary = make_dictionary(pirate_translations)
-translation = translate("Get me a lawyer sir. I cannot abide this hotel.", pirate_dictionary)
-print translation
-
+	pass
 
 
