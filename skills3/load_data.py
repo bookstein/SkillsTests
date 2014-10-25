@@ -19,7 +19,7 @@ def make_customer_table():
 		surname VARCHAR(30),
 		password VARCHAR(200),
 		telephone VARCHAR(20),
-		called DATE,
+		called VARCHAR(10),
 		tos_agree INTEGER,
 		gender VARCHAR(13),
 		dob DATE,
@@ -42,22 +42,20 @@ def populate_customer_table():
 		customer_id, first, last, email, telephone, called = line.strip().split(",")
 		#CSV data: customer_id,first,last,email,telephone,called
 
-		# if called == "":
-		# 	called = datetime.strptime("01/01/1970", "%m/%d/%Y")
-		if len(called) == 10:
-			called = datetime.strptime(called, "%m/%d/%Y")
-		else:
-			called = date(1970, 01, 01)
+		if called == "":
+			called = "00/00/0000"
+		# if len(called) == 10:
+		# 	called = datetime.strptime(called, "%m/%d/%Y")
+		# else:
+		# 	called = date(1970, 01, 01)
 
-		print called
+		print customer_id, first, last, email, telephone, called
 
-		# print customer_id, first, last, email, telephone, called
+		query = """INSERT INTO customers (email, givenname, surname, telephone,
+			called) VALUES (?, ?, ?, ?, ?)"""
+		DB.execute(query, (email, first, last, telephone, called))
 
-	# 	query = """INSERT INTO customers (id, email, givenname, surname, telephone,
-	# 		called) VALUES (?, ?, ?, ?, ?, ?)"""
-	# 	DB.execute(query, (customer_id, email, first, last, telephone, called))
-
-	# CONN.commit()
+	CONN.commit()
 	f.close()
 
 def make_orders_table():
