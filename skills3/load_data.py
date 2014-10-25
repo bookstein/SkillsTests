@@ -76,20 +76,43 @@ def make_orders_table():
 		tax NUMERIC(10, 2),
 		delivery_method VARCHAR(20),
 		delivery_amount NUMERIC(10, 2),
-		order_total NUMERIC(10, 2), delivered_at INTEGER,
+		order_total NUMERIC(10, 2),
+		delivered_at INTEGER,
 		PRIMARY KEY (id),
 		CHECK (status IN ('New', 'Processing', 'Out for Delivery', 'Delivered', 'Canceled'))
 		);
 		""")
 	CONN.commit()
 
+def populate_orders_table():
+	f = open("orders.csv")
 
+	# gets first row of file -- headers -- this was causing an error in datatype
+	header = f.readline().rstrip().split(",")
+
+	for line in f:
+#order_id,order_date,status,customer_id,email,address,city,state,postalcode,num_watermelons,num_othermelons,subtotal,tax,order_total
+		data = line.strip().split(",")
+		(order_id,order_date,status,customer_id,email,address,city,state,postalcode,
+			num_watermelons,num_othermelons,subtotal,tax,order_total) = data
+
+		query = """INSERT INTO orders (customer_id, status, shipto_postalcode,
+			num_watermelons, num_othermelons,
+			subtotal, order_total)
+			VALUES (?,?,?,?,?,?,?)"""
+
+		DB.execute(query, (customer_id, status, postalcode,
+			num_watermelons, num_othermelons, subtotal, order_total))
+
+	CONN.commit()
+	f.close()
 
 def main():
 	connect_to_db()
 	# make_customer_table()
-	populate_customer_table()
+	# populate_customer_table()
 	# make_orders_table()
+	populate_orders_table()
 	CONN.close()
 
 
