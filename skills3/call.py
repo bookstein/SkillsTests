@@ -12,7 +12,16 @@ call.py - Telemarketing script that displays the next name
 
 #Class definition to store our customer data
 class Customer(object):
+	def __init__(self, first, last, email, telephone, called):
+		self.first = first
+		self.last = last
+		self.email = email
+		self.telephone = ''
+		self.called = ''
 
+	def __str__():
+		return "Name: %s %s\n Telephone: %s\n Last called: %s" % (first, last,
+			 telephone, called)
 
 # Connect to the Database
 def connect_to_db():
