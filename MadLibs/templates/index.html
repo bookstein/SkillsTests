@@ -14,6 +14,10 @@
 			<label for="adjective">Adjective</label>
 			<input type="text" name="adjective" class="form-control">
 		</div>
+		<div class="form-group">
+			<label for="compliments">Compliments?</label>
+			<input type="checkbox" name="compliments" class="form-control">
+		</div>
 		<input type="submit" class="btn btn-primary" value="Make Madlib!">
 		<button class="btn btn-danger" id="AJAX-button">Make with AJAX</button>
 	</form>
@@ -21,6 +25,16 @@
 	{% if name %}
 		<div id="madlib-result">
 			<h3>{{ name }} is in a {{ adjective }} place.</h3>
+		</div>
+	{% endif %}
+
+	{% if compliments %}
+		<div id="compliments-list">
+			<ul>
+			{% for compliment in compliments %}
+				<li>{{ compliment }}</li>
+			{% endfor %}
+			</ul>
 		</div>
 	{% endif %}
 
@@ -32,7 +46,8 @@
 			e.preventDefault();
 			// GET request (via HTTP) sent to localhost:5000/new/madlib
 			// why don't I need to serialize here? is that optional?
-			$("#madlib-result").load(response)
+			$("#madlib-result").load(response);
+			$("form").reset();
 		});
 	</script>
 </body>
