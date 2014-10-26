@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from random import choice, sample
 
 app = Flask(__name__)
@@ -24,7 +24,9 @@ def display_madlib():
 	else:
 		compliment_list = None
 
+		# how do I get rid of the form data from the URL??
 	return render_template("index.html", name=name, adjective=adjective, compliments=compliment_list)
+	# return redirect("index.html", name=name, adjective=adjective, compliments=compliment_list)
 
 def make_compliments():
 	compliments = sample(COMPLIMENTS, 3)
