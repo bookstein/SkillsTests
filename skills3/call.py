@@ -9,6 +9,7 @@ call.py - Telemarketing script that displays the next name
 
 """
 import sqlite3 as sq3
+from datetime import date, datetime
 from load_data import connect_to_db
 CONN = None
 DB = None
@@ -68,7 +69,13 @@ def display_next_to_call(customer):
 # Update the "last called" column for the customer
 #   in the database.
 def update_customer_called(customer):
-	pass
+	# using UTC time for consistency
+	today = datetime.utcnow()
+	query = """UPDATE customers
+		SET called = ?
+		WHERE id = ?"""
+	DB.execute(query, (today, customer.id))
+	CONN.commit()
 
 def main():
 	done = False
