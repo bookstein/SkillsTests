@@ -26,10 +26,16 @@
 
 
 	<script>
+	// on click of AJAX-button:
 		$("#AJAX-button").click(function(e) {
+			// prevent default (which is to GO to url)
 			e.preventDefault();
+			// GET request (via HTTP) sent to localhost:5000/new/madlib
+			// why don't I need to serialize here? is that optional?
 			$.get(
 				"new/madlib",
+				// success callback: insert response into madlib-result div
+				// including replacing templating brackets with vars
 				function(response) {
 					$("#madlib-result").text(response)
 				}
