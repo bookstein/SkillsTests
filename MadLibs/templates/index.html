@@ -2,6 +2,7 @@
 <head>
 	<title>Mad Libs!</title>
 	<link type="text/css" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
 	<h1>MadLibs!</h1>
@@ -19,8 +20,9 @@
 			<input type="checkbox" name="compliments" class="form-control">
 		</div>
 		<input type="submit" class="btn btn-primary" value="Make Madlib!">
-		<button class="btn btn-danger" id="AJAX-button">Make with AJAX</button>
 	</form>
+
+	<a href= "" class="btn btn-danger" id="AJAX-button">Make with AJAX</a>
 
 	{% if name %}
 		<div id="madlib-result">
@@ -46,7 +48,11 @@
 			e.preventDefault();
 			// GET request (via HTTP) sent to localhost:5000/new/madlib
 			// why don't I need to serialize here? is that optional?
-			$("#madlib-result").load(response);
+		// ANSWER:
+		// val of name
+		// val of adjective
+		// use string concat to add to URL OR let jquery build it
+			$("#madlib-result").load("/new/madlib");
 			$("form").reset();
 		});
 	</script>
